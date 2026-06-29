@@ -4,6 +4,7 @@ import Controls from './components/Controls'
 import Navbar from './components/Navbar'
 import Home from './components/Home'
 import IPhone from './components/IPhone'
+import McBook from './components/MacBook'
 
 const App = () => {
   const [frameZoom, setFrameZoom] = useState(false)
@@ -27,7 +28,8 @@ const App = () => {
         <Controls toggleZoom={toggleZoom} frameZoom={frameZoom}/>
         <div className="flex-grow">
           {/* <Home/> */}
-          <IPhone />
+          {/* <IPhone /> */}
+          <McBook />
         </div>
       </div>
     </div>
