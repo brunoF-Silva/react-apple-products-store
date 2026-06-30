@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Controls from "./components/Controls";
 import Navbar from "./components/Navbar";
 import Home from "./components/Home";
@@ -12,12 +12,26 @@ import PageTransition from "./components/PageTransition";
 const App = () => {
   const [frameZoom, setFrameZoom] = useState(false);
   const [activePage, setActivePage] = useState(0);
+  const [isLgScreen, setIsLgScreen] = useState(window.innerWidth > 1024);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsLgScreen(window.innerWidth >= 1024)
+      if(window.innerWidth < 1024) {
+        setFrameZoom(false)
+      }
+    }
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, []);
 
   const handleNavClick = (pageIndex: number) => {
     setActivePage(pageIndex);
   };
   const toggleZoom = () => {
-    setFrameZoom(!frameZoom);
+    if(isLgScreen) {
+      setFrameZoom(!frameZoom);
+    }
   };
 
   const resetPage = () => {
